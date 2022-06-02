@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express');
 const app = express(); 
 
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
 
 //forma de ler JSON
 app.use(
