@@ -1,6 +1,6 @@
 cosnt mongoose = require('mongoose')
 
-const Playlists = mongoose.model('Usuario', {
+const Playlists = mongoose.model('Playlist', {
     
     "nome": String,
     "email": String,
@@ -17,4 +17,4 @@ const Playlists = mongoose.model('Usuario', {
 
 })
 
-module.exports = Usuarios
+module.exports = Playlists
