@@ -1,11 +1,11 @@
 const router = require('express').Router()
 
-const Musicas = require("../models/playlists")
+const Playlists = require("../models/playlists")
 
 //Create - criação de dados
 router.post('/', async (req,res) =>{
 
-    const{musica,imagem,id} = req.body
+    const{musica,imagem,idUsuario,nome} = req.body
 
     if(!musica){
         res.status(422).json({error: 'é necessário passar as musicas'})
@@ -25,7 +25,7 @@ router.post('/', async (req,res) =>{
 
     try {
         // criando dados
-        await Playlists.create(playlistss)
+        await Playlists.create(playlists)
 
         res.status(200).json({message: 'Playlist criada com sucesso'})
 
@@ -37,16 +37,43 @@ router.post('/', async (req,res) =>{
 
 //Read - leitura de dados
 router.get('/', async (req, res) => {
+    const idUsuario_ = req.query.idUsuario
 
-    try {
-        
-        const playlists = await Playlists.find()
+    if (idUsuario_) {
+        console.log(idUsuario_)
 
-        res.status(200).json(playlists)
+        try {
+            const playlists = await Playlists.find({ idUsuario : idUsuario_ })
 
-    } catch (error) {
-        res.status(500).json({error: error})
+            console.log(playlists)
+
+            if(!playlists){
+                res.status(422).json({message: 'Playlist não encontrada!'})
+                return
+            }
+
+            res.status(200).json(playlists)
+        } catch (error) {
+            
+            res.status(500).json({ error: error })
+
+        }
+    } else {
+        try {
+            
+            const playlists = await Playlists.find()
+
+            res.status(200).json(playlists)
+
+        } catch (error) {
+            res.status(500).json({error: error})
+        }
     }
+
+    // extrair o dado da requisição, pela url = req.params
+    
+
+    
 
 })
 
@@ -74,16 +101,18 @@ router.get('/:id', async (req, res) => {
 
 })
 
+
 //Update - atualização de dados(PUT, PATCH)
 router.patch('/:id', async(req, res) => {
     
     const id1 = req.params.id
 
-    const{musica,imagem,id} = req.body
+    const{musica,imagem,idUsuario,nome} = req.body
 
     const playlists = {
         musica,
         imagem,
+        // nome,
         id
     }
 
