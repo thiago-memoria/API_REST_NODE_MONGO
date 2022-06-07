@@ -1,11 +1,11 @@
-cosnt mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 const Playlists = mongoose.model('Playlist', {
     
-    "id": number,
+    "idUsuario": Number,
     "imagem": String,
-    "musicas": [],
-    
+    "nome": String,
+    "musicas": []
 })
 
 module.exports = Playlists
