@@ -1,4 +1,4 @@
-cosnt mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 const Usuarios = mongoose.model('Usuario', {
     
@@ -11,8 +11,8 @@ const Usuarios = mongoose.model('Usuario', {
     "logradouro": String,
     "cidade": String,
     "estado": String,
-    "playlists": [],
-    "id": Int
+    // "playlists": [],
+    "id": Number
 
 
 })
