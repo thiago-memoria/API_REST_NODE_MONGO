@@ -5,7 +5,7 @@ const Playlists = require("../models/playlists")
 //Create - criação de dados
 router.post('/', async (req,res) =>{
 
-    const{musica,imagem,idUsuario,nome} = req.body
+    const{idUsuario,imagem,nome,musica} = req.body
 
     if(!musica){
         res.status(422).json({error: 'é necessário passar as musicas'})
@@ -17,10 +17,11 @@ router.post('/', async (req,res) =>{
         return
     }
 
-    const musicas = {
-    musica,
+    const playlists = {
+    idUsuario,
     imagem,
-    id
+    nome,
+    musica
     }
 
     try {
@@ -107,14 +108,14 @@ router.patch('/:id', async(req, res) => {
     
     const id1 = req.params.id
 
-    const{musica,imagem,idUsuario,nome} = req.body
+    const{idUsuario,imagem,nome,musica} = req.body
 
     const playlists = {
-        musica,
+        idUsuario,
         imagem,
-        // nome,
-        id
-    }
+        nome,
+        musica
+        }
 
     try {
         
